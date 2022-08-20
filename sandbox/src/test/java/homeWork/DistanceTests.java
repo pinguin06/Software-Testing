@@ -9,13 +9,13 @@ public class DistanceTests {
     public void Test2Distance() {
         Point p1 = new Point(0, 0);
         Point p2 = new Point(10, 10);
-        Assert.assertTrue(p1.distance1(p2) == 14.142135623730951);
+        Assert.assertEquals(p1.distance1(p2),14.142135623730951);
     }
 
     @Test
     public void Test3Distance() {
         Point p1 = new Point(0, 0);
-        Point p2 = new Point(10, 10);
-        Assert.assertNotNull(p1.distance1(p2));
+        Point p2 = new Point(-10, -10);
+        Assert.assertTrue(p1.distance1(p2) >= 0);
     }
 }
