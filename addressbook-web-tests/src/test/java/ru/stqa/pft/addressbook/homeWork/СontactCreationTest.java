@@ -7,7 +7,7 @@ import org.testng.annotations.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class contactCreationTest {
+public class СontactCreationTest {
     private WebDriver wd;
     private JavascriptExecutor js;
 
