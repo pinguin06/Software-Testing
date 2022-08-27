@@ -1,17 +1,15 @@
-package ru.stqa.pft.addressbook.homeWork;
+package ru.stqa.pft.addressbook.tests;
 
 import org.testng.annotations.*;
-
-import ru.stqa.pft.addressbook.TestBase;
+import ru.stqa.pft.addressbook.model.ContactData;
 
 public class ContactCreationTest extends TestBase {
     @Test
     public void testContactCreation() throws Exception {
-        goToAddContactPage();
-        fillContactForm(
+        app.goToAddContactPage();
+        app.fillContactForm(
                 new ContactData("Olga", "Romanshchak", "pinguin06", "Saint Petersburg", "123456789", "pinguin06@rambler.ru"));
-        submitContactCreation();
-        goToHomePage();
+        app.submitContactCreation();
+        app.goToHomePage();
     }
-
 }
