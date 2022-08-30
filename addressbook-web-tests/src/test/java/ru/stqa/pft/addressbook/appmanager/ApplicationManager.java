@@ -7,9 +7,8 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import java.time.Duration;
 
 public class ApplicationManager {
-
     WebDriver wd;
-
+    private NavigationHelper navigationHelper;
     private GroupHelper groupHelper;
  //   private JavascriptExecutor js;
 
@@ -19,11 +18,12 @@ public class ApplicationManager {
         wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
    //     js = (JavascriptExecutor) wd;
         groupHelper = new GroupHelper(wd);
+        navigationHelper = new NavigationHelper(wd);
         login("admin", "secret");
     }
 
     private void login(String username, String password) {
-        wd.get("http://localhost/addressbook/addressbook/");
+       wd.get("http://localhost/addressbook/addressbook/");
         wd.findElement(By.name("user")).click();
         wd.findElement(By.name("user")).clear();
         wd.findElement(By.name("user")).sendKeys(username);
@@ -31,10 +31,6 @@ public class ApplicationManager {
         wd.findElement(By.name("pass")).clear();
         wd.findElement(By.name("pass")).sendKeys(password);
         wd.findElement(By.xpath("//input[@value='Login']")).click();
-    }
-
-    public void goToGroupPage() {
-        wd.findElement(By.linkText("groups")).click();
     }
 
     public void stop() {
@@ -57,11 +53,6 @@ public class ApplicationManager {
         } catch (NoAlertPresentException e) {
             return false;
         }
-    }
-
-    public void goToHomePage() {
-        wd.findElement(By.linkText("home page")).click();
-        wd.get("http://localhost/addressbook/addressbook/index.php");
     }
 
     public void submitContactCreation() {
@@ -89,12 +80,11 @@ public class ApplicationManager {
         wd.findElement(By.name("email")).sendKeys(contactData.getEmail());
     }
 
-    public void goToAddContactPage() {
-        wd.findElement(By.linkText("add new")).click();
-        wd.get("http://localhost/addressbook/addressbook/edit.php");
-    }
-
     public GroupHelper getGroupHelper() {
         return groupHelper;
+    }
+
+    public NavigationHelper getNavigationHelper() {
+        return navigationHelper;
     }
 }
