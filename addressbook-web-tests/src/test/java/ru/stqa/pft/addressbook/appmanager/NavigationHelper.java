@@ -24,4 +24,8 @@ public class NavigationHelper extends HelperBase{
         click(By.linkText("add new"));
         wd.get("http://localhost/addressbook/addressbook/edit.php");
     }
+
+    public void closeAlert() {
+        wd.switchTo().alert().accept();
+    }
 }

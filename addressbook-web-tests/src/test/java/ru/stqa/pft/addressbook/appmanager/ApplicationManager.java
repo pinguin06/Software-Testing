@@ -6,7 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
 
-public class ApplicationManager{
+public class ApplicationManager {
     WebDriver wd;
     private SessionHelper sessionHelper;
     private NavigationHelper navigationHelper;
@@ -31,7 +31,6 @@ public class ApplicationManager{
     }
 
 
-
     public GroupHelper getGroupHelper() {
         return groupHelper;
     }
@@ -44,7 +43,8 @@ public class ApplicationManager{
         return contactHelper;
     }
 
-    public SessionHelper getSessionHelper(){
+    public SessionHelper getSessionHelper() {
         return sessionHelper;
     }
+
 }
