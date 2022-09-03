@@ -9,6 +9,7 @@ import org.openqa.selenium.remote.BrowserType;
 
 
 import java.time.Duration;
+import java.util.Objects;
 
 public class ApplicationManager {
     WebDriver wd;
@@ -23,13 +24,13 @@ public class ApplicationManager {
     }
 
     public void init() {
-        if(browser == BrowserType.CHROME) {
+        if(Objects.equals(browser, BrowserType.CHROME)) {
             System.setProperty("webdriver.chrome.driver", "C:\\Windows\\System32\\chromedriver.exe");
             wd = new ChromeDriver();
-        } else if (browser == BrowserType.FIREFOX) {
+        } else if (Objects.equals(browser, BrowserType.FIREFOX)) {
             System.setProperty("webdriver.firefox.driver", "C:\\Windows\\System32\\geckodriver.exe");
             wd = new FirefoxDriver();
-        } else if (browser == BrowserType.IE) {
+        } else if (Objects.equals(browser, BrowserType.IE)) {
             System.setProperty("webdriver.ie.driver", "C:\\Windows\\System32\\IEDriverServer.exe");
             wd = new InternetExplorerDriver();
         }
