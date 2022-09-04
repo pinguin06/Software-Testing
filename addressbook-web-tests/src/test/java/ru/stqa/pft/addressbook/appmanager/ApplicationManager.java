@@ -34,7 +34,7 @@ public class ApplicationManager {
             System.setProperty("webdriver.ie.driver", "C:\\Windows\\System32\\IEDriverServer.exe");
             wd = new InternetExplorerDriver();
         }
-        wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         wd.get("http://localhost/addressbook/addressbook/");
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
