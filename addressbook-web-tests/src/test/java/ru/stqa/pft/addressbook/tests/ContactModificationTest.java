@@ -14,7 +14,9 @@ public class ContactModificationTest extends TestBase{
                         "pinguin06_mod",
                         "Saint Petersburg",
                         "123456789",
-                        "pinguin06_mod@rambler.ru"));
+                        "pinguin06_mod@rambler.ru",
+                        null),
+                        false);
         app.getContactHelper().submitContactModification();
         app.getNavigationHelper().goToHomePage();
 
