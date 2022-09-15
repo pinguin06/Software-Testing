@@ -2,9 +2,12 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
+
+import java.util.List;
 
 public class ContactHelper extends HelperBase {
     public ContactHelper(WebDriver wd) {
@@ -30,6 +33,7 @@ public class ContactHelper extends HelperBase {
         }
     }
 
+
     public void selectContact() {
         click(By.name("selected[]"));
     }
@@ -38,8 +42,17 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//input[@value='Delete']"));
     }
 
-    public void initContactModification() {
-        click(By.xpath("/html/body/div/div[4]/form[2]/table/tbody/tr[2]/td[8]/a/img"));
+    public void initContactModification(int ind) {
+        int i = getContactCount();
+        if (ind <= 1) {
+            click(By.xpath("/html/body/div/div[4]/form[2]/table/tbody/tr[2]/td[8]/a/img"));
+        } else {
+            if (ind <= i + 1) {
+                click(By.xpath("/html/body/div/div[4]/form[2]/table/tbody/tr[" + ind + "]/td[8]/a/img"));
+            } else {
+                click(By.xpath("/html/body/div/div[4]/form[2]/table/tbody/tr[" + (i + 1) + "]/td[8]/a/img"));
+            }
+        }
     }
 
     public void submitContactModification() {
@@ -48,12 +61,10 @@ public class ContactHelper extends HelperBase {
 
     public void deleteSelectedContactFromEditPage() {
         click(By.xpath("//*[@id=\"content\"]/form[2]/input[2]"));
-        //*[@id="content"]/form[2]/input[2]
-        //*[@id="content"]/form[2]/input[2]
     }
 
     public void createContact(ContactData contact) {
-        fillContactForm(contact,true);
+        fillContactForm(contact, true);
         submitContactCreation();
     }
 

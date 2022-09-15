@@ -21,10 +21,10 @@ public class ContactModificationTest extends TestBase{
             int before = app.getContactHelper().getContactCount();
         }
         int before = app.getContactHelper().getContactCount();
-        app.getContactHelper().initContactModification();
+        app.getContactHelper().initContactModification(0);
         app.getContactHelper().fillContactForm(
                 new ContactData("Olga",
-                        "Romanshchak",
+                        "siztt",
                         "pinguin06_mod",
                         "Saint Petersburg",
                         "123456789",
