@@ -6,10 +6,10 @@ import ru.stqa.pft.addressbook.model.ContactData;
 
 public class ContactModificationTest extends TestBase{
 
-    @Test
+    @Test(enabled = false)
     public void testContactModification() {
         if (!app.getContactHelper().isThereAContact()){
-            app.getNavigationHelper().goToAddContactPage();
+            app.goTo().addContactPage();
             app.getContactHelper().createContact(new ContactData("Rita",
                     "Kukushkina",
                     "pinguin06",
@@ -17,7 +17,7 @@ public class ContactModificationTest extends TestBase{
                     "123456789",
                     "pinguin06@rambler.ru",
                     "test1_mod"));
-            app.getNavigationHelper().goToHomePage();
+            app.goTo().homePage();
             int before = app.getContactHelper().getContactCount();
         }
         int before = app.getContactHelper().getContactCount();
@@ -32,7 +32,7 @@ public class ContactModificationTest extends TestBase{
                         null),
                         false);
         app.getContactHelper().submitContactModification();
-        app.getNavigationHelper().goToHomePage();
+        app.goTo().homePage();
         int after = app.getContactHelper().getContactCount();
         Assert.assertEquals(after, before);
 

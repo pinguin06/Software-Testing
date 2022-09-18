@@ -8,10 +8,10 @@ import ru.stqa.pft.addressbook.model.ContactData;
 public class ContactDeletionTests extends TestBase {
 
 
-    @Test
+    @Test(enabled = false)
     public void testContactDeletion() {
         if (!app.getContactHelper().isThereAContact()) {
-            app.getNavigationHelper().goToAddContactPage();
+            app.goTo().addContactPage();
             app.getContactHelper().createContact(new ContactData("Rita",
                     "Kukushkina",
                     "pinguin06",
@@ -19,21 +19,21 @@ public class ContactDeletionTests extends TestBase {
                     "123456789",
                     "pinguin06@rambler.ru",
                     "test1_mod"));
-            app.getNavigationHelper().goToHomePage();
+            app.goTo().homePage();
             int before = app.getContactHelper().getContactCount();
         }
         int before = app.getContactHelper().getContactCount();
         app.getContactHelper().selectContact(0);
         app.getContactHelper().deleteSelectedContacts();
-        app.getNavigationHelper().closeAlert();
+        app.goTo().closeAlert();
         int after = app.getContactHelper().getContactCount();
         Assert.assertEquals(after, before - 1);
     }
 
-    @Test
+    @Test(enabled = false)
     public void testContactDeletionFromEditPage() {
         if (!app.getContactHelper().isThereAContact()) {
-            app.getNavigationHelper().goToAddContactPage();
+            app.goTo().addContactPage();
             app.getContactHelper().createContact(new ContactData("Rita",
                     "Kukushkina",
                     "pinguin06",
@@ -41,7 +41,7 @@ public class ContactDeletionTests extends TestBase {
                     "123456789",
                     "pinguin06@rambler.ru",
                     "test1_mod"));
-            app.getNavigationHelper().goToHomePage();
+            app.goTo().homePage();
             int before = app.getContactHelper().getContactCount();
         }
         int before = app.getContactHelper().getContactCount();
