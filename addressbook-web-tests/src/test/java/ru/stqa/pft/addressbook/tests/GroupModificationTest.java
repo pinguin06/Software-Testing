@@ -12,14 +12,15 @@ public class GroupModificationTest extends TestBase {
     public void ensurePreconditions() {
         app.goTo().groupPage();
         if (app.group().list().size() == 0) {
-            app.group().create(new GroupData("test21", "test22", "test23"));
+            app.group().create(new GroupData().withName("test1"));
         }
     }
 
     @Test
     public void testGroupModification() throws Exception {
         List<GroupData> before = app.group().list();
-        GroupData group = new GroupData(before.get(before.size() - 1).getId(), "test1_mod1234", "test2_mod", "test3_mod");
+        GroupData group = new GroupData().withId(before.get(before.size() - 1).getId()).withName("test1_mod1234")
+                .withHeader("test2_mod").withFooter("test3_mod");
         int index = before.size() - 1;
         app.group().modify(group, index);
         List<GroupData> after = app.group().list();
