@@ -8,7 +8,7 @@ import ru.stqa.pft.addressbook.model.ContactData;
 public class ContactDeletionTests extends TestBase {
 
 
-    @Test(enabled = false)
+    @Test()
     public void testContactDeletion() {
         if (!app.getContactHelper().isThereAContact()) {
             app.goTo().addContactPage();
@@ -18,19 +18,19 @@ public class ContactDeletionTests extends TestBase {
                     "Saint Petersburg",
                     "123456789",
                     "pinguin06@rambler.ru",
-                    "test1_mod"));
+                    "test1"));
             app.goTo().homePage();
-            int before = app.getContactHelper().getContactCount();
         }
         int before = app.getContactHelper().getContactCount();
         app.getContactHelper().selectContact(0);
         app.getContactHelper().deleteSelectedContacts();
         app.goTo().closeAlert();
+        app.goTo().homePage();
         int after = app.getContactHelper().getContactCount();
         Assert.assertEquals(after, before - 1);
     }
 
-    @Test(enabled = false)
+    @Test()
     public void testContactDeletionFromEditPage() {
         if (!app.getContactHelper().isThereAContact()) {
             app.goTo().addContactPage();
@@ -40,13 +40,13 @@ public class ContactDeletionTests extends TestBase {
                     "Saint Petersburg",
                     "123456789",
                     "pinguin06@rambler.ru",
-                    "test1_mod"));
+                    "test1"));
             app.goTo().homePage();
-            int before = app.getContactHelper().getContactCount();
         }
         int before = app.getContactHelper().getContactCount();
         app.getContactHelper().initContactModification(3);
         app.getContactHelper().deleteSelectedContactFromEditPage();
+        app.goTo().homePage();
         int after = app.getContactHelper().getContactCount();
         Assert.assertEquals(after, before - 1);
     }
