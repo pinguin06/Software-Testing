@@ -4,6 +4,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
+import java.util.List;
+
 
 public class ContactDeletionTests extends TestBase {
 
@@ -21,13 +23,15 @@ public class ContactDeletionTests extends TestBase {
                     "test1"));
             app.goTo().homePage();
         }
-        int before = app.getContactHelper().getContactCount();
+        List<ContactData> before = app.getContactHelper().getContactList();
+    //    int before = app.getContactHelper().getContactCount();
         app.getContactHelper().selectContact(0);
         app.getContactHelper().deleteSelectedContacts();
         app.goTo().closeAlert();
         app.goTo().homePage();
-        int after = app.getContactHelper().getContactCount();
-        Assert.assertEquals(after, before - 1);
+        List<ContactData> after = app.getContactHelper().getContactList();
+        //int after = app.getContactHelper().getContactCount();
+        Assert.assertEquals(after.size(), before.size() - 1);
     }
 
     @Test()
@@ -43,11 +47,13 @@ public class ContactDeletionTests extends TestBase {
                     "test1"));
             app.goTo().homePage();
         }
-        int before = app.getContactHelper().getContactCount();
+        List<ContactData> before = app.getContactHelper().getContactList();
+        //int before = app.getContactHelper().getContactCount();
         app.getContactHelper().initContactModification(3);
         app.getContactHelper().deleteSelectedContactFromEditPage();
         app.goTo().homePage();
-        int after = app.getContactHelper().getContactCount();
-        Assert.assertEquals(after, before - 1);
+        List<ContactData> after = app.getContactHelper().getContactList();
+       // int after = app.getContactHelper().getContactCount();
+        Assert.assertEquals(after.size(), before.size() - 1);
     }
 }
