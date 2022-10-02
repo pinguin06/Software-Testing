@@ -9,14 +9,13 @@ public class ContactData {
     private final String email;
     private String group;
 
-    public ContactData(String firstname, String lastname, String nickname, String address, String mobile, String email, String group) {
+    public ContactData(String firstname, String lastname, String nickname, String address, String mobile, String email) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.nickname = nickname;
         this.address = address;
         this.mobile = mobile;
         this.email = email;
-        this.group = group;
     }
 
     public String getFirstname() {

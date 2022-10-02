@@ -5,7 +5,7 @@ import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 public class ContactCreationTest extends TestBase {
-    @Test(enabled = false)
+    @Test()
     public void testContactCreation() throws Exception {
         int before = app.getContactHelper().getContactCount();
         app.goTo().addContactPage();
@@ -14,8 +14,7 @@ public class ContactCreationTest extends TestBase {
                         "pinguin06",
                         "Saint Petersburg",
                         "123456789",
-                        "pinguin06@rambler.ru",
-                        "test1_mod"));
+                        "pinguin06@rambler.ru"));
         app.goTo().homePage();
         int after = app.getContactHelper().getContactCount();
         Assert.assertEquals(after, before + 1);

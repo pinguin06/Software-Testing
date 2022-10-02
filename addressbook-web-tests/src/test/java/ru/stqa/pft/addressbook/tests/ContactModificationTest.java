@@ -6,7 +6,7 @@ import ru.stqa.pft.addressbook.model.ContactData;
 
 public class ContactModificationTest extends TestBase{
 
-    @Test(enabled = false)
+    @Test()
     public void testContactModification() {
         if (!app.getContactHelper().isThereAContact()){
             app.goTo().addContactPage();
@@ -15,8 +15,7 @@ public class ContactModificationTest extends TestBase{
                     "pinguin06",
                     "Saint Petersburg",
                     "123456789",
-                    "pinguin06@rambler.ru",
-                    "test1_mod"));
+                    "pinguin06@rambler.ru"));
             app.goTo().homePage();
             int before = app.getContactHelper().getContactCount();
         }
@@ -28,8 +27,7 @@ public class ContactModificationTest extends TestBase{
                         "pinguin06_mod",
                         "Saint Petersburg",
                         "123456789",
-                        "pinguin06_mod@rambler.ru",
-                        null),
+                        "pinguin06_mod@rambler.ru"),
                         false);
         app.getContactHelper().submitContactModification();
         app.goTo().homePage();
