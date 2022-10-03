@@ -19,14 +19,13 @@ public class ContactModificationTest extends TestBase {
                     "pinguin06",
                     "Saint Petersburg",
                     "123456789",
-                    "pinguin06@rambler.ru",
-                    "test1"));
+                    "pinguin06@rambler.ru"));
             app.goTo().homePage();
         }
         List<ContactData> before = app.getContactHelper().getContactList();
         app.getContactHelper().initContactModification(before.size() - 1);
-        ContactData contact = new ContactData(before.get(before.size() - 1).getId(),"Olga",
-                "Roman",
+        ContactData contact = new ContactData(before.get(before.size() - 1).getId(),"Olga11",
+                "Roman11",
                 "null",
                 "Saint Petersburg",
                 "123456789",

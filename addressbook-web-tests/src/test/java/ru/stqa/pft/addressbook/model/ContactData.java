@@ -23,7 +23,7 @@ public class ContactData {
         this.group = group;
     }
 
-    public ContactData(String firstname, String lastname, String nickname, String address, String mobile, String email, String group) {
+    public ContactData(String firstname, String lastname, String nickname, String address, String mobile, String email) {
         this.id = null;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -31,7 +31,6 @@ public class ContactData {
         this.address = address;
         this.mobile = mobile;
         this.email = email;
-        this.group = group;
     }
 
 

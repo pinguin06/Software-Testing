@@ -18,8 +18,7 @@ public class ContactCreationTest extends TestBase {
                         "pinguin06",
                         "Saint Petersburg",
                         "123456789",
-                        "pinguin06@rambler.ru",
-                        "test1"));
+                        "pinguin06@rambler.ru"));
         app.goTo().homePage();
         List<ContactData> after = app.getContactHelper().getContactList();
 //        int after = app.getContactHelper().getContactCount();

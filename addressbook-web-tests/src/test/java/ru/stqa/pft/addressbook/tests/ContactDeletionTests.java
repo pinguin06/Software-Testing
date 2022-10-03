@@ -19,8 +19,7 @@ public class ContactDeletionTests extends TestBase {
                     "pinguin06",
                     "Saint Petersburg",
                     "123456789",
-                    "pinguin06@rambler.ru",
-                    "test1"));
+                    "pinguin06@rambler.ru"));
             app.goTo().homePage();
         }
         List<ContactData> before = app.getContactHelper().getContactList();
@@ -42,8 +41,7 @@ public class ContactDeletionTests extends TestBase {
                     "pinguin06",
                     "Saint Petersburg",
                     "123456789",
-                    "pinguin06@rambler.ru",
-                    "test1"));
+                    "pinguin06@rambler.ru"));
             app.goTo().homePage();
         }
         List<ContactData> before = app.getContactHelper().getContactList();
