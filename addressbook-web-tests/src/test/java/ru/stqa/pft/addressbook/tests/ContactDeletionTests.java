@@ -24,7 +24,6 @@ public class ContactDeletionTests extends TestBase {
             app.goTo().homePage();
         }
         List<ContactData> before = app.getContactHelper().getContactList();
-    //    int before = app.getContactHelper().getContactCount();
         app.getContactHelper().selectContact(0);
         app.getContactHelper().deleteSelectedContacts();
         app.goTo().closeAlert();
@@ -48,12 +47,10 @@ public class ContactDeletionTests extends TestBase {
             app.goTo().homePage();
         }
         List<ContactData> before = app.getContactHelper().getContactList();
-        //int before = app.getContactHelper().getContactCount();
         app.getContactHelper().initContactModification(3);
         app.getContactHelper().deleteSelectedContactFromEditPage();
         app.goTo().homePage();
         List<ContactData> after = app.getContactHelper().getContactList();
-       // int after = app.getContactHelper().getContactCount();
         Assert.assertEquals(after.size(), before.size() - 1);
     }
 }

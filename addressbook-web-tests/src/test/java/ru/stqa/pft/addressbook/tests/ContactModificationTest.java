@@ -4,13 +4,15 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 
-public class ContactModificationTest extends TestBase{
+public class ContactModificationTest extends TestBase {
 
     @Test()
     public void testContactModification() {
-        if (!app.getContactHelper().isThereAContact()){
+        if (!app.getContactHelper().isThereAContact()) {
             app.goTo().addContactPage();
             app.getContactHelper().createContact(new ContactData("Rita",
                     "Kukushkina",
@@ -22,23 +24,22 @@ public class ContactModificationTest extends TestBase{
             app.goTo().homePage();
         }
         List<ContactData> before = app.getContactHelper().getContactList();
-       // int before = app.getContactHelper().getContactCount();
         app.getContactHelper().initContactModification(before.size() - 1);
-        app.getContactHelper().fillContactForm(
-                new ContactData("Olga1",
-                        "siztt",
-                        "pinguin06_mod1",
-                        "Saint Petersburg",
-                        "123456789",
-                        "pinguin06_mod@rambler.ru",
-                        null),
-                        false);
+        ContactData contact = new ContactData(before.get(before.size() - 1).getId(),"Olga",
+                "Roman",
+                "null",
+                "Saint Petersburg",
+                "123456789",
+                "pinguin06_mod@rambler.ru",
+                null);
+        app.getContactHelper().fillContactForm(contact, false);
         app.getContactHelper().submitContactModification();
         app.goTo().homePage();
         List<ContactData> after = app.getContactHelper().getContactList();
-       // int after = app.getContactHelper().getContactCount();
         Assert.assertEquals(after.size(), before.size());
 
-
+        before.remove(before.size() - 1);
+        before.add(contact);
+        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after)); //преобразование в массив
     }
 }
