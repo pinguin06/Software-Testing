@@ -19,15 +19,27 @@ public class ContactHelper extends HelperBase {
     }
 
     public void fillContactForm(ContactData contactData, boolean creation) {
-        type(By.name("firstname"), contactData.getFirstname());
+       type(By.name("firstname"), contactData.getFirstname());
         type(By.name("lastname"), contactData.getLastname());
         type(By.name("nickname"), contactData.getNickname());
         type(By.name("address"), contactData.getAddress());
         type(By.name("mobile"), contactData.getMobile());
         type(By.name("email"), contactData.getEmail());
-
+/*
         if (creation) {
             new Select(wd.findElement(By.name("new_group"))).selectByIndex(1);
+        } else {
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
+        }*/
+        if (creation) {
+            Select se = new Select(wd.findElement(By.name("new_group")));
+            List<WebElement> l = se.getOptions();
+            int i = l.size();
+            if (i == 1) {
+            new Select(wd.findElement(By.name("new_group"))).selectByIndex(0);
+            } else {
+                new Select(wd.findElement(By.name("new_group"))).selectByIndex(1);
+            }
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
@@ -49,7 +61,7 @@ public class ContactHelper extends HelperBase {
             click(By.xpath("/html/body/div/div[4]/form[2]/table/tbody/tr[2]/td[8]/a/img"));
         } else {
             if (ind <= i + 1) {
-                click(By.xpath("/html/body/div/div[4]/form[2]/table/tbody/tr[" + ind + "]/td[8]/a/img"));
+                click(By.xpath("/html/body/div/div[4]/form[2]/table/tbody/tr[" + ind+1 + "]/td[8]/a/img"));
             } else {
                 click(By.xpath("/html/body/div/div[4]/form[2]/table/tbody/tr[" + (i + 1) + "]/td[8]/a/img"));
             }
