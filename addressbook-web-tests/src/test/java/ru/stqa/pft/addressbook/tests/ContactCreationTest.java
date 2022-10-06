@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 
 public class ContactCreationTest extends TestBase {
-    @Test()
+    @Test(enabled = false)
     public void testContactCreation() throws Exception {
         List<ContactData> before = app.getContactHelper().getContactList();
         ContactData contact = new ContactData("Olgass",
@@ -20,7 +20,6 @@ public class ContactCreationTest extends TestBase {
                 "pinguin06@rambler.ru");
         app.goTo().addContactPage();
         app.getContactHelper().createContact(contact);
-        app.goTo().homePage();
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size() + 1);
 
