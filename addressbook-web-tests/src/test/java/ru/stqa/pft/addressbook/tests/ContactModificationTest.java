@@ -14,12 +14,12 @@ public class ContactModificationTest extends TestBase {
     public void ensurePreconditions() {
         if (app.contact().list().size() == 0) {
             app.goTo().addContactPage();
-            app.contact().create(new ContactData("Rita",
-                    "Kukushkina",
-                    "pinguin06",
-                    "Saint Petersburg",
-                    "123456789",
-                    "pinguin06@rambler.ru"));
+            app.contact().create(new ContactData().withFirstname("Rita")
+                    .withLastname("Kukushkina")
+                    .withNickname("pinguin06")
+                    .withAddress("Saint Petersburg")
+                    .withMobile("123456789")
+                    .withEmail("pinguin06@rambler.ru"));
             app.goTo().homePage();
         }
     }
@@ -28,13 +28,13 @@ public class ContactModificationTest extends TestBase {
     public void testContactModification() {
         List<ContactData> before = app.contact().list();
         int index = before.size() - 1;
-        ContactData contact = new ContactData(before.get(index).getId(),"Ira",
-                "Romans",
-                "null",
-                "Saint Petersburg",
-                "123456789",
-                "pinguin06_mod@rambler.ru",
-                null);
+        ContactData contact = new ContactData().withId(before.get(index).getId())
+                .withFirstname("Olga")
+                .withLastname("Romanshchak")
+                .withNickname("pinguin06")
+                .withAddress("Saint Petersburg")
+                .withMobile("123456789")
+                .withEmail("pinguin06@rambler.ru");
         app.contact().modify(index, contact);
         app.goTo().homePage();
         List<ContactData> after = app.contact().list();
@@ -45,6 +45,6 @@ public class ContactModificationTest extends TestBase {
         Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
         before.sort(byId);
         after.sort(byId);
-        Assert.assertEquals(before,after);
+        Assert.assertEquals(before, after);
     }
 }

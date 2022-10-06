@@ -8,17 +8,18 @@ import java.util.Comparator;
 import java.util.List;
 
 public class ContactCreationTest extends TestBase {
-    @Test(enabled = false)
+    @Test
     public void testContactCreation() throws Exception {
         List<ContactData> before = app.contact().list();
-        ContactData contact = new ContactData("Olgass",
-                "Romanshchak",
-                "pinguin06",
-                "Saint Petersburg",
-                "123456789",
-                "pinguin06@rambler.ru");
+        ContactData contact = new ContactData().withFirstname("Olga")
+                .withLastname("Romanshchak")
+                .withNickname("pinguin06")
+                .withAddress("Saint Petersburg")
+                .withMobile("123456789")
+                .withEmail("pinguin06@rambler.ru");
         app.goTo().addContactPage();
         app.contact().create(contact);
+        app.goTo().homePage();
         List<ContactData> after = app.contact().list();
         Assert.assertEquals(after.size(), before.size() + 1);
 
@@ -26,6 +27,6 @@ public class ContactCreationTest extends TestBase {
         Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
         before.sort(byId);
         after.sort(byId);
-        Assert.assertEquals(before,after);
+        Assert.assertEquals(before, after);
     }
 }

@@ -93,17 +93,16 @@ public class ContactHelper extends HelperBase {
         deleteSelectedContacts();
     }
 
-        public List<ContactData> list() {
-            List<ContactData> contacts = new ArrayList<ContactData>();
-            List<WebElement> elements = wd.findElements(By.cssSelector(("tr[name=entry]")));
-            for (WebElement element : elements) {
-                List<WebElement> contactData = element.findElements(By.tagName("td"));
-                int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-                String name = contactData.get(2).getText();
-                String surname = contactData.get(1).getText();
-                ContactData contact = new ContactData(id, name, surname, null, null, null, null, null);
-                contacts.add(contact);
-            }
-            return contacts;
+    public List<ContactData> list() {
+        List<ContactData> contacts = new ArrayList<ContactData>();
+        List<WebElement> elements = wd.findElements(By.cssSelector(("tr[name=entry]")));
+        for (WebElement element : elements) {
+            List<WebElement> contactData = element.findElements(By.tagName("td"));
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            String name = contactData.get(2).getText();
+            String surname = contactData.get(1).getText();
+            contacts.add(new ContactData().withId(id).withFirstname(name).withLastname(surname));
         }
+        return contacts;
     }
+}
