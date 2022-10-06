@@ -42,7 +42,6 @@ public class ContactHelper extends HelperBase {
         }
     }
 
-
     public void selectContact(int index) {
         wd.findElements(By.name("selected[]")).get(index).click();
     }
@@ -55,9 +54,11 @@ public class ContactHelper extends HelperBase {
     }
 
     public void initContactModification(int index) {
-
         click(By.xpath("/html/body/div/div[4]/form[2]/table/tbody/tr[" + (index + 2) + "]/td[8]/a/img"));
+    }
 
+    private void initContactModificationById(int id) {
+        wd.findElement(By.cssSelector("a[href='edit.php?id=" + id + "']")).click();
     }
 
     public void submitContactModification() {
@@ -73,29 +74,16 @@ public class ContactHelper extends HelperBase {
         submitContactCreation();
     }
 
-    public void modify(int index, ContactData contact) {
-        initContactModification(index);
+    public void modify(ContactData contact) {
+        initContactModificationById(contact.getId());
         fillContactForm(contact, false);
         submitContactModification();
-    }
-
-    public boolean isThereAContact() {
-        return isElementPresent(By.name("selected[]"));
-    }
-
-    public int getContactCount() {
-        return wd.findElements(By.name("selected[]")).size();
     }
 
     public void deleteFromEditPage(int index) {
         initContactModification(index);
         deleteSelectedContactFromEditPage();
 
-    }
-
-    public void delete(int index) {
-        selectContact(index);
-        deleteSelectedContacts();
     }
 
     public void delete(ContactData contact) {
@@ -127,6 +115,14 @@ public class ContactHelper extends HelperBase {
             contacts.add(new ContactData().withId(id).withFirstname(name).withLastname(surname));
         }
         return contacts;
+    }
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.name("selected[]"));
+    }
+
+    public int getContactCount() {
+        return wd.findElements(By.name("selected[]")).size();
     }
 
 
