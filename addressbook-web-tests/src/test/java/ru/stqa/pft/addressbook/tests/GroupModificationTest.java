@@ -9,6 +9,7 @@ import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 public class GroupModificationTest extends TestBase {
     @BeforeMethod
@@ -27,12 +28,8 @@ public class GroupModificationTest extends TestBase {
                 .withHeader("test2_mod").withFooter("test3_mod");
         app.group().modify(group);
         Groups after = app.group().all();
-        assertThat(after.size(), equalTo(before.size()));
+        assertEquals(after.size(), before.size());
 
-        before.remove(modifiedGroup);
-        before.add(group);
-        assertThat(after, equalTo(before));
-    }
-
-
+        assertThat(after, equalTo(before.withOut(modifiedGroup).withAdded(group)));
+       }
 }
