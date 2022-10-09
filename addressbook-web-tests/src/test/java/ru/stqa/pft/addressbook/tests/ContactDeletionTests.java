@@ -8,6 +8,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 
 public class ContactDeletionTests extends TestBase {
 
@@ -34,7 +37,7 @@ public class ContactDeletionTests extends TestBase {
         app.goTo().closeAlert();
         app.goTo().homePage();
         Set<ContactData> after = app.contact().all();
-        Assert.assertEquals(after.size(), before.size() - 1);
+        assertThat(after.size(), equalTo(before.size() - 1));
 
         before.remove(deletedContact);
         Assert.assertEquals(before,after);
