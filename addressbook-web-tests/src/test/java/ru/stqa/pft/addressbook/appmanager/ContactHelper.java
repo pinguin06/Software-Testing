@@ -7,12 +7,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
-import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends HelperBase {
     public ContactHelper(WebDriver wd) {
@@ -51,6 +48,7 @@ public class ContactHelper extends HelperBase {
     private void selectContactById(int id) {
         wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
     }
+
     public void deleteSelectedContacts() {
         click(By.xpath("//input[@value='Delete']"));
     }
@@ -109,7 +107,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public Contacts all() {
-        if(contactsCache != null) {
+        if (contactsCache != null) {
             return new Contacts(contactsCache);
         }
         contactsCache = new Contacts();
@@ -125,11 +123,12 @@ public class ContactHelper extends HelperBase {
     }
 
     private Contacts contactsCache = null;
+
     public boolean isThereAContact() {
         return isElementPresent(By.name("selected[]"));
     }
 
-    public int getContactCount() {
+    public int count() {
         return wd.findElements(By.name("selected[]")).size();
     }
 
