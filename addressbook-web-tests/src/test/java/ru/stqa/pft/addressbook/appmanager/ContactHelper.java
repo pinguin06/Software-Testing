@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -73,23 +74,25 @@ public class ContactHelper extends HelperBase {
     public void create(ContactData contact) {
         fillContactForm(contact, true);
         submitContactCreation();
+        contactsCache = null;
     }
 
     public void modify(ContactData contact) {
         initContactModificationById(contact.getId());
         fillContactForm(contact, false);
         submitContactModification();
+        contactsCache = null;
     }
 
     public void deleteFromEditPage(int index) {
         initContactModification(index);
         deleteSelectedContactFromEditPage();
-
     }
 
     public void delete(ContactData contact) {
         selectContactById(contact.getId());
         deleteSelectedContacts();
+        contactsCache = null;
     }
 
     public List<ContactData> list() {
@@ -106,18 +109,22 @@ public class ContactHelper extends HelperBase {
     }
 
     public Contacts all() {
-        Contacts contacts = new Contacts();
+        if(contactsCache != null) {
+            return new Contacts(contactsCache);
+        }
+        contactsCache = new Contacts();
         List<WebElement> elements = wd.findElements(By.cssSelector(("tr[name=entry]")));
         for (WebElement element : elements) {
             List<WebElement> contactData = element.findElements(By.tagName("td"));
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             String name = contactData.get(2).getText();
             String surname = contactData.get(1).getText();
-            contacts.add(new ContactData().withId(id).withFirstname(name).withLastname(surname));
+            contactsCache.add(new ContactData().withId(id).withFirstname(name).withLastname(surname));
         }
-        return contacts;
+        return new Contacts(contactsCache);
     }
 
+    private Contacts contactsCache = null;
     public boolean isThereAContact() {
         return isElementPresent(By.name("selected[]"));
     }
