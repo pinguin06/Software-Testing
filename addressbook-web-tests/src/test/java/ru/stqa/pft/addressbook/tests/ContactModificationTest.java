@@ -19,8 +19,8 @@ public class ContactModificationTest extends TestBase {
                     .withLastname("Kukushkina")
                     .withNickname("pinguin06")
                     .withAddress("Saint Petersburg")
-                    .withMobile("123456789")
-                    .withEmail("pinguin06@rambler.ru"));
+                    .withMobilePhone("123456789")
+                    .withEmail1("pinguin06@rambler.ru"));
             app.goTo().homePage();
         }
     }
@@ -34,8 +34,8 @@ public class ContactModificationTest extends TestBase {
                 .withLastname("Romanshchak")
                 .withNickname("pinguin06")
                 .withAddress("Saint Petersburg")
-                .withMobile("123456789")
-                .withEmail("pinguin06@rambler.ru");
+                .withMobilePhone("123456789")
+                .withEmail1("pinguin06@rambler.ru");
         app.contact().modify(contact);
         app.goTo().homePage();
         assertThat(app.contact().count(), equalTo(before.size()));

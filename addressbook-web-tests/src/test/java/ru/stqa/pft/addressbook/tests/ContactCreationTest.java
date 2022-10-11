@@ -15,8 +15,8 @@ public class ContactCreationTest extends TestBase {
                 .withLastname("Romanshchak")
                 .withNickname("pinguin06")
                 .withAddress("Saint Petersburg")
-                .withMobile("123456789")
-                .withEmail("pinguin06@rambler.ru");
+                .withMobilePhone("123456789")
+                .withEmail1("pinguin06@rambler.ru");
         app.goTo().addContactPage();
         app.contact().create(contact);
         app.goTo().homePage();
