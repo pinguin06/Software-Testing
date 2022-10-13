@@ -27,32 +27,15 @@ public class ContactDataTests extends TestBase {
     }
 
     @Test
-    public void testContactPhones() {
+    public void testContactData() {
         app.goTo().homePage();
         ContactData contact = app.contact().all().iterator().next();
         ContactData contactInfoFromEditPage = app.contact().infoFromEditForm(contact);
 
         assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditPage)));
-    }
-
-    @Test
-    public void testContactEmails() {
-        app.goTo().homePage();
-        ContactData contact = app.contact().all().iterator().next();
-        ContactData contactInfoFromEditPage = app.contact().infoFromEditForm(contact);
-
         assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoFromEditPage)));
-    }
-
-    @Test
-    public void testContactAddress() {
-        app.goTo().homePage();
-        ContactData contact = app.contact().all().iterator().next();
-        ContactData contactInfoFromEditPage = app.contact().infoFromEditForm(contact);
-
         assertThat(contact.getAddress(), equalTo(contactInfoFromEditPage.getAddress()));
     }
-
 
     public static String cleaned(String phone) {
         return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
