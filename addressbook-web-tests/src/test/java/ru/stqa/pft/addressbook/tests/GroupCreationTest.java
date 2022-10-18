@@ -60,7 +60,7 @@ public class GroupCreationTest extends TestBase {
         List<GroupData> groups = gson.fromJson(json, new TypeToken<List<GroupData>>(){}.getType());
         return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
     }
-    @Test(dataProvider = "validGroupsXml")
+    @Test(dataProvider = "validGroupsJson")
     public void testGroupCreation(GroupData group) throws Exception {
         app.goTo().groupPage();
         Groups before = app.group().all();
