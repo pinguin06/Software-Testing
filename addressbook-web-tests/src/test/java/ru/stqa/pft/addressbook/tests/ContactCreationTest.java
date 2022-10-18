@@ -5,10 +5,7 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -22,18 +19,17 @@ public class ContactCreationTest extends TestBase {
     public Iterator<Object[]> contactDataFromCsv() throws IOException {
         File photo = new File("src/test/resources/dog.jpg");
         List<Object[]> list = new ArrayList<Object[]>();
-        list.add(new Object[]{new ContactData().withFirstname("Olga1").withLastname("Suvorova1")
-                .withNickname("nick1").withAddress("Address1")
-                .withMobilePhone("123456781").withEmail1("email1@mail.ru")
-                .withPhoto(photo)});
-        list.add(new Object[]{new ContactData().withFirstname("Olga2").withLastname("Suvorova2")
-                .withNickname("nick2").withAddress("Address2")
-                .withMobilePhone("123456782").withEmail1("email2@mail.ru")
-                .withPhoto(photo)});
-        list.add(new Object[]{new ContactData().withFirstname("Olga3").withLastname("Suvorova3")
-                .withNickname("nick3").withAddress("Address3")
-                .withMobilePhone("123456783").withEmail1("email3@mail.ru")
-                .withPhoto(photo)});
+        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.csv")));
+        String line = reader.readLine();
+        while (line != null) {
+            String[] split = line.split(";");
+            list.add(new Object[] {new ContactData().withFirstname(split[0])
+                    .withLastname(split[1])
+                    .withNickname(split[2]).withAddress(split[3])
+                    .withMobilePhone(split[4]).withEmail1(split[5])
+                    .withPhoto(photo)});
+            line = reader.readLine();
+        }
         return list.iterator();
     }
 
