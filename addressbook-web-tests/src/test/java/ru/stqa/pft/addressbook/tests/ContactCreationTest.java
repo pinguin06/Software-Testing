@@ -48,6 +48,7 @@ public class ContactCreationTest extends TestBase {
         }
         XStream xStream = new XStream();
         xStream.processAnnotations(ContactData.class);
+        xStream.allowTypes(new Class[]{ContactData.class});
         List<ContactData> contacts = (List<ContactData>) xStream.fromXML(xml);
         return contacts.stream().map((c) -> new Object[] {c}).collect(Collectors.toList()).iterator();
     }

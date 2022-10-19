@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -62,6 +63,7 @@ public class ContactDataGenerator {
     private void saveAsXml(List<ContactData> contacts, File file) throws IOException {
         XStream xStream = new XStream();
         xStream.processAnnotations(ContactData.class);
+        xStream.allowTypes(new Class[]{ContactData.class});
         String xml = xStream.toXML(contacts);
         Writer writer = new FileWriter(file);
         writer.write(xml);

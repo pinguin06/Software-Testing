@@ -43,6 +43,7 @@ public class GroupCreationTest extends TestBase {
         }
         XStream xStream = new XStream();
         xStream.processAnnotations(GroupData.class);
+        xStream.allowTypes(new Class[]{GroupData.class});
         List<GroupData> groups = (List<GroupData>) xStream.fromXML(xml);
         return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
     }
@@ -60,7 +61,7 @@ public class GroupCreationTest extends TestBase {
         List<GroupData> groups = gson.fromJson(json, new TypeToken<List<GroupData>>(){}.getType());
         return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
     }
-    @Test(dataProvider = "validGroupsJson")
+    @Test(dataProvider = "validGroupsXml")
     public void testGroupCreation(GroupData group) throws Exception {
         app.goTo().groupPage();
         Groups before = app.group().all();
