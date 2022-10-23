@@ -19,3 +19,14 @@ dependencies {
 
 }
 
+task testGroups(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testngGroups.xml'
+    }
+}
+
+task testContacts(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testngContacts.xml'
+    }
+}
