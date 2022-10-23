@@ -45,8 +45,7 @@ public class GroupDataGenerator {
             saveAsXml(groups, new File(file));
         } else if (format.equals("json")) {
             saveAsJson(groups, new File(file));
-        }
-        else {
+        } else {
             System.out.println("Unrecognized format: " + format);
         }
     }
@@ -54,28 +53,28 @@ public class GroupDataGenerator {
     private void saveAsJson(List<GroupData> groups, File file) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
         String json = gson.toJson(groups);
-        Writer writer = new FileWriter(file);
-        writer.write(json);
-        writer.close();
+        try (Writer writer = new FileWriter(file)) {
+            writer.write(json);
+        }
     }
 
     private void saveAsXml(List<GroupData> groups, File file) throws IOException {
-       XStream xStream = new XStream();
-       xStream.processAnnotations(GroupData.class);
+        XStream xStream = new XStream();
+        xStream.processAnnotations(GroupData.class);
         xStream.allowTypes(new Class[]{GroupData.class});
         String xml = xStream.toXML(groups);
-        Writer writer = new FileWriter(file);
-        writer.write(xml);
-        writer.close();
+        try (Writer writer = new FileWriter(file)) {
+            writer.write(xml);
+        }
     }
 
     private void saveAsCsv(List<GroupData> groups, File file) throws IOException {
         System.out.println(new File(".").getAbsoluteFile());
-        Writer writer = new FileWriter(file);
-        for (GroupData group : groups) {
-            writer.write(String.format("%s;%s;%s\n", group.getName(),group.getHeader(), group.getFooter()));
+        try (Writer writer = new FileWriter(file)) {
+            for (GroupData group : groups) {
+                writer.write(String.format("%s;%s;%s\n", group.getName(), group.getHeader(), group.getFooter()));
+            }
         }
-        writer.close();
     }
 
     private List<GroupData> generatorGroups(int count) {
